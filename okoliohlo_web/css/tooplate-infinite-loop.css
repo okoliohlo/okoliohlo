@@ -153,6 +153,7 @@ blockquote {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-attachment: scroll;
   min-height: 100vh;
   height: auto;
   position: relative;
@@ -162,26 +163,27 @@ blockquote {
 
 @media (max-width: 991px) {
   #infinite {
-    background-size: cover;
-    background-position: center center;
-    background-attachment: scroll;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
   }
 }
 
 @media (max-width: 767px) {
   #infinite {
-    background-image: url(../img/IMG_3167.jpeg);
-    background-size: cover;
-    background-position: center top;
-    background-attachment: scroll;
+    background-image: url(../img/IMG_3167.jpeg) !important;
+    background-size: cover !important;
+    background-position: 50% 20% !important;
+    background-attachment: scroll !important;
     min-height: 100vh;
   }
 }
 
 @media (max-width: 480px) {
   #infinite {
-    background-position: center center;
-    background-size: cover;
+    background-position: center center !important;
+    background-size: cover !important;
+    padding-bottom: 60px;
   }
 }
 
@@ -305,7 +307,7 @@ blockquote {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: fixed;
+  background-attachment: scroll;
   min-height: 100vh;
   position: relative;
 }
@@ -981,26 +983,30 @@ p {
   
   /* Better background positioning on tablets */
   #whatwedo {
-    background-attachment: scroll;
-    background-size: cover;
-    background-position: center center;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 }
 
 @media (max-width: 767px) {
   #whatwedo {
-    background-image: url(../img/office.png);
-    background-size: cover;
-    background-position: center center;
-    background-attachment: scroll;
-    min-height: auto;
+    background-image: url(../img/office.png) !important;
+    background-size: cover !important;
+    background-position: 50% 30% !important;
+    background-attachment: scroll !important;
+    min-height: auto !important;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 }
 
 @media (max-width: 480px) {
   #whatwedo {
-    background-size: cover;
-    background-position: center center;
+    background-size: cover !important;
+    background-position: center 20% !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 }
 
@@ -1187,20 +1193,20 @@ p {
   
   /* Optimize parallax sections for mobile */
   #contact {
-    background-attachment: scroll;
-    background-size: cover;
-    background-position: center center;
-    min-height: auto;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    min-height: auto !important;
   }
 }
 
 @media (max-width: 480px) {
   #contact {
-    background-image: url(../img/infinite-loop-03.jpg);
-    background-size: cover;
-    background-position: center center;
-    background-attachment: scroll;
-    min-height: auto;
+    background-image: url(../img/infinite-loop-03.jpg) !important;
+    background-size: cover !important;
+    background-position: center 40% !important;
+    background-attachment: scroll !important;
+    min-height: auto !important;
     padding-top: 60px;
     padding-bottom: 40px;
   }
