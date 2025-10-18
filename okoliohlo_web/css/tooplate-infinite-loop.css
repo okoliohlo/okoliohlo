@@ -921,3 +921,221 @@ p {
     margin: 0;
   }
 }
+
+/* ========================================
+   MOBILE OPTIMIZATION - Priority 1 Fixes
+   ======================================== */
+
+/* Fix 1: Professional Experience section - full width on mobile */
+@media (max-width: 991px) {
+  #whatwedo .col-lg-6 {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+  
+  #whatwedo .tm-intro-text-container {
+    line-height: 1.5 !important;
+    padding: 0 5%;
+  }
+  
+  #whatwedo .tm-intro-text-container p {
+    line-height: 1.6 !important;
+  }
+  
+  #whatwedo .tm-intro-text-container ul {
+    line-height: 1.6 !important;
+  }
+  
+  #whatwedo .tm-intro-text-container li {
+    margin-bottom: 0.5rem;
+  }
+  
+  #whatwedo .tm-section-title {
+    font-size: 2.2rem !important;
+    white-space: normal !important;
+  }
+  
+  /* Better background positioning on tablets */
+  #whatwedo {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
+/* Fix 2: Scale hero text for mobile screens */
+@media (max-width: 767px) {
+  .tm-hero-title {
+    font-size: 2.2rem !important;
+  }
+  
+  .tm-hero-subtitle {
+    font-size: 1.2rem !important;
+  }
+  
+  #infinite .tm-intro-text {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  .tm-hero-text-container-inner {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tm-hero-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .tm-hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  #infinite .tm-intro-text {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Fix 3: Disable video backgrounds on mobile (save data/battery) */
+@media (max-width: 768px) {
+  .tm-video-background {
+    display: none !important;
+  }
+  
+  #testimonials {
+    background: linear-gradient(135deg, #1a4d5d 0%, #2d5a6b 100%);
+  }
+}
+
+/* Fix 4: Fix skill tooltip overflow on mobile */
+@media (max-width: 768px) {
+  .skill-description {
+    width: 90vw !important;
+    max-width: 320px !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) scale(0) !important;
+  }
+  
+  .skill-badge-python:hover .skill-description,
+  .skill-badge-java:hover .skill-description,
+  .skill-badge-javascript:hover .skill-description {
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.7rem !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 90vw !important;
+    max-width: 300px !important;
+  }
+  
+  /* Make skill badges more mobile-friendly */
+  #testimonials .badge {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.7rem !important;
+    margin: 0.2rem !important;
+  }
+  
+  #testimonials .skill-category {
+    padding: 15px !important;
+  }
+  
+  #testimonials h4 {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Fix 5: Improve contact form on mobile */
+@media (max-width: 767px) {
+  .tm-input {
+    width: 100% !important;
+    margin: 0 0 15px 0;
+  }
+  
+  .tm-btn-submit {
+    width: 100% !important;
+    margin-bottom: 40px;
+  }
+  
+  .contact-item {
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+  
+  #contact {
+    padding-top: 80px;
+  }
+}
+
+/* Fix 6: Better touch targets for mobile */
+@media (max-width: 767px) {
+  .nav-item .tm-nav-link {
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+  }
+  
+  .tm-down-arrow {
+    padding: 20px 50px !important;
+    font-size: 2.5rem !important;
+  }
+  
+  /* Larger tap targets for contact links */
+  .item-link {
+    padding: 10px 0;
+  }
+  
+  .item-link i {
+    font-size: 2rem !important;
+  }
+}
+
+/* Fix 7: Section title scaling for readability */
+@media (max-width: 767px) {
+  .tm-section-title {
+    font-size: 1.9rem !important;
+  }
+  
+  #testimonials .tm-section-title {
+    font-size: 2.1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .tm-section-title {
+    font-size: 1.6rem !important;
+  }
+  
+  #testimonials .tm-section-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* Additional mobile improvements */
+@media (max-width: 767px) {
+  /* Better section spacing on mobile */
+  .tm-section-pad-top {
+    padding-top: 60px;
+    padding-bottom: 30px;
+  }
+  
+  /* Improve education section on mobile */
+  #gallery .tm-content-box {
+    padding: 25px !important;
+  }
+  
+  /* Better footer positioning */
+  .tm-footer {
+    position: relative;
+    bottom: auto;
+    margin-top: 30px;
+  }
+  
+  /* Optimize parallax sections for mobile */
+  #contact {
+    background-attachment: scroll;
+    background-size: cover;
+    min-height: auto;
+  }
+}
