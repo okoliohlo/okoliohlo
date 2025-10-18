@@ -427,34 +427,61 @@ blockquote {
   z-index: 1;
 }
 
+/* Ensure testimonials section allows tooltips to overflow */
+#testimonials {
+  position: relative;
+  overflow: visible;
+}
+
+#testimonials .tm-testimonials-content {
+  position: relative;
+  overflow: visible;
+}
+
+#testimonials .container {
+  position: relative;
+  overflow: visible;
+}
+
+#testimonials .row {
+  position: relative;
+  overflow: visible;
+}
+
+#testimonials .col-md-6 {
+  position: relative;
+  overflow: visible;
+}
+
 /* Skill Description Windows */
 .skill-badge-python,
 .skill-badge-java,
 .skill-badge-javascript {
   overflow: visible !important;
   position: relative;
-  z-index: 10000;
+  z-index: 99999;
 }
 
 .skill-description {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(10px) scale(0);
-  margin-top: 10px;
+  transform: translate(-50%, -50%) scale(0);
+  margin-top: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   width: 450px;
   max-width: 90vw;
-  z-index: 9999;
+  z-index: 999999;
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 80vh;
 }
 
 /* JavaScript specific - smaller to fit within block */
@@ -480,7 +507,7 @@ blockquote {
 .skill-badge-python:hover .skill-description,
 .skill-badge-java:hover .skill-description,
 .skill-badge-javascript:hover .skill-description {
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   pointer-events: auto;
 }
@@ -1069,25 +1096,37 @@ p {
 /* Fix 4: Fix skill tooltip overflow on mobile */
 @media (max-width: 768px) {
   .skill-description {
-    width: 90vw !important;
-    max-width: 320px !important;
+    position: fixed !important;
+    top: 50% !important;
     left: 50% !important;
-    transform: translateX(-50%) translateY(10px) scale(0) !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+    width: 85vw !important;
+    max-width: 340px !important;
+    max-height: 70vh !important;
+    padding: 20px !important;
+    z-index: 999999 !important;
+    overflow-y: auto !important;
   }
   
   .skill-badge-python:hover .skill-description,
   .skill-badge-java:hover .skill-description,
   .skill-badge-javascript:hover .skill-description {
-    transform: translateX(-50%) translateY(0) scale(1) !important;
+    transform: translate(-50%, -50%) scale(1) !important;
   }
   
   .skill-description p {
-    font-size: 0.7rem !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
   }
   
   .skill-badge-javascript .skill-description {
-    width: 90vw !important;
-    max-width: 300px !important;
+    width: 85vw !important;
+    max-width: 340px !important;
+  }
+  
+  /* Arrow pointer - hide on mobile since it's centered */
+  .skill-description::before {
+    display: none !important;
   }
   
   /* Make skill badges more mobile-friendly */
@@ -1099,10 +1138,32 @@ p {
   
   #testimonials .skill-category {
     padding: 15px !important;
+    overflow: visible !important;
   }
   
   #testimonials h4 {
     font-size: 1.2rem !important;
+  }
+  
+  /* Ensure all parent containers allow overflow */
+  #testimonials,
+  #testimonials .tm-testimonials-content,
+  #testimonials .container,
+  #testimonials .row,
+  #testimonials .col-md-6 {
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-description {
+    width: 90vw !important;
+    max-width: 320px !important;
+    padding: 18px !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.8rem !important;
   }
 }
 
