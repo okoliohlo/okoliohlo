@@ -164,6 +164,24 @@ blockquote {
   #infinite {
     background-size: cover;
     background-position: center center;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 767px) {
+  #infinite {
+    background-image: url(../img/IMG_3167.jpeg);
+    background-size: cover;
+    background-position: center top;
+    background-attachment: scroll;
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 480px) {
+  #infinite {
+    background-position: center center;
+    background-size: cover;
   }
 }
 
@@ -502,6 +520,12 @@ blockquote {
 @media (max-width: 991px) {
   .tm-video-background {
     object-fit: cover;
+  }
+}
+
+@media (max-width: 767px) {
+  .tm-video-background {
+    display: none !important;
   }
 }
 
@@ -959,6 +983,24 @@ p {
   #whatwedo {
     background-attachment: scroll;
     background-size: cover;
+    background-position: center center;
+  }
+}
+
+@media (max-width: 767px) {
+  #whatwedo {
+    background-image: url(../img/office.png);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #whatwedo {
+    background-size: cover;
+    background-position: center center;
   }
 }
 
@@ -1004,6 +1046,17 @@ p {
   
   #testimonials {
     background: linear-gradient(135deg, #1a4d5d 0%, #2d5a6b 100%);
+    background-size: cover;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  #testimonials {
+    background: linear-gradient(135deg, #1a4d5d 0%, #2d5a6b 100%);
+    min-height: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 }
 
@@ -1136,6 +1189,19 @@ p {
   #contact {
     background-attachment: scroll;
     background-size: cover;
+    background-position: center center;
     min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #contact {
+    background-image: url(../img/infinite-loop-03.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll;
+    min-height: auto;
+    padding-top: 60px;
+    padding-bottom: 40px;
   }
 }
