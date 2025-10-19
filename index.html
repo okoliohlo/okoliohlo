@@ -35,13 +35,13 @@ https://www.tooplate.com/view/2117-infinite-loop
                   <a class="nav-link tm-nav-link" href="#infinite">Executive Summary</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link tm-nav-link" href="#whatwedo">Professional Experience</a>
+                  <a class="nav-link tm-nav-link" href="#professional-experience">Professional Experience</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link tm-nav-link" href="#testimonials">Technical Skills</a>
+                <a class="nav-link tm-nav-link" href="#technical-skills">Technical Skills</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link tm-nav-link" href="#gallery">Education and Certifications</a>
+                  <a class="nav-link tm-nav-link" href="#education-certifications">Education and Certifications</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link tm-nav-link" href="#contact">Contact</a>
@@ -58,7 +58,7 @@ https://www.tooplate.com/view/2117-infinite-loop
               Lead Automation Test Engineer
             </p>
             <div class="container" style="max-width: 900px; margin-top: 40px;">
-              <p class="tm-intro-text" style="font-size: 1.43rem; line-height: 1.8; text-align: left;">
+              <p class="tm-intro-text" style="font-size: 1.43rem; line-height: 1.8; text-align: left; color: #ffa500; font-weight: 600; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
                 Lead Test Automation Engineer with over 9 years of experience building scalable test frameworks across web, mobile, and API platforms using Selenium WebDriver, Appium, Postman, and modern automation tools. Proven track record in reducing testing cycles and improving defect detection rates through comprehensive CI/CD integration with Jenkins and version control systems. Skilled in developing robust automated test scripts that ensure high-quality code delivery through systematic testing approaches. Experienced leading QA teams in Agile environments, driving testing processes from planning through execution while maintaining high test coverage and delivering releases on schedule with minimal defects.
               </p>
             </div>
@@ -66,13 +66,13 @@ https://www.tooplate.com/view/2117-infinite-loop
       </div>
 
       <div class="tm-next tm-intro-next">
-        <a href="#whatwedo" class="text-center tm-down-arrow-link">
+        <a href="#professional-experience" class="text-center tm-down-arrow-link">
           <i class="fas fa-2x fa-arrow-down tm-down-arrow"></i>
         </a>
       </div>
     </section>
 
-    <section id="whatwedo" class="tm-section-pad-top">
+    <section id="professional-experience" class="tm-section-pad-top">
       <div class="container">
 
             <div class="row tm-content-box"><!-- first row -->
@@ -162,12 +162,13 @@ https://www.tooplate.com/view/2117-infinite-loop
 
     </section>
 
-    <section id="testimonials" class="tm-section-pad-top tm-parallax-2">
-      <video autoplay loop muted playsinline class="tm-video-background">
-        <source src="img/typing.mp4" type="video/mp4">
+    <section id="technical-skills" class="tm-section-pad-top tm-parallax-2" style="position: relative; overflow: hidden; background-color: #000;">
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 0.5;"></div>
+      <video autoplay loop muted playsinline class="tm-video-background" style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 0; opacity: 0.8; filter: brightness(0.4);">
+        <source src="img/coding.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div class="container tm-testimonials-content">
+      <div class="container tm-technical-skills-content" style="position: relative; z-index: 1;">
         <div class="row">
           <div class="col-lg-12 tm-content-box">
                           <h2 class="text-white text-center mb-4 tm-section-title">Technical Skills</h2>
@@ -331,11 +332,10 @@ https://www.tooplate.com/view/2117-infinite-loop
           </div>
         </div>
       </div>
-      <div class="tm-bg-overlay"></div>
     </section>
 
-    <section id="gallery" class="tm-section-pad-top">
-      <div class="container tm-container-gallery">
+    <section id="education-certifications" class="tm-section-pad-top">
+      <div class="container tm-container-education">
         <div class="row">
           <div class="text-center col-12">
               <h2 class="tm-text-primary tm-section-title mb-4">Education and Certifications</h2>
@@ -359,7 +359,12 @@ https://www.tooplate.com/view/2117-infinite-loop
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="tm-section-pad-top tm-parallax-2">
+    <section id="contact" class="tm-section-pad-top">
+      <video autoplay loop muted playsinline class="tm-video-background">
+        <source src="img/sapce.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="tm-bg-overlay"></div>
 
       <div class="container tm-container-contact">
 
@@ -398,14 +403,9 @@ https://www.tooplate.com/view/2117-infinite-loop
                 </div>
 
                 <div class="contact-item">&nbsp;</div>
-
             </div>
-
-
         </div><!-- row ending -->
-
       </div>
-
       	<footer class="text-center small tm-footer">
           <p class="mb-0">
           Copyright &copy; 2025 Okoliohlo profile. </p>
@@ -487,7 +487,7 @@ https://www.tooplate.com/view/2117-infinite-loop
         // Hero Section - Background Parallax
         background_image_parallax($(".tm-parallax"), 0.30, false);
         background_image_parallax_2($("#contact"), 0.80);
-        background_image_parallax_2($("#testimonials"), 0.80);
+        background_image_parallax_2($("#technical-skills"), 0.80);
 
         // Handle window resize
         window.addEventListener('resize', function(){
@@ -508,35 +508,36 @@ https://www.tooplate.com/view/2117-infinite-loop
           $('.navbar-collapse').removeClass('show');
         })
 
-        // Scroll to corresponding section with animation
-        $('#tmNav').singlePageNav({
-          'easing': 'easeInOutExpo',
-          'speed': 600
-        });
-
-        // Add smooth scrolling to all links
-        // https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
-        $("a").on('click', function(event) {
-          if (this.hash !== "") {
-            event.preventDefault();
-            var hash = this.hash;
-
+        // Simple and reliable smooth scrolling for navigation
+        $('.tm-nav-link').on('click', function(event) {
+          event.preventDefault();
+          
+          var targetId = $(this).attr('href');
+          var targetSection = $(targetId);
+          
+          console.log('Clicked link:', targetId);
+          console.log('Target section found:', targetSection.length > 0);
+          
+          if (targetSection.length > 0) {
+            var offsetTop = targetSection.offset().top - 70; // Account for navbar height
+            
             $('html, body').animate({
-              scrollTop: $(hash).offset().top
-            }, 600, 'easeInOutExpo', function(){
-              window.location.hash = hash;
-            });
-          } // End if
+              scrollTop: offsetTop
+            }, 600, 'easeInOutExpo');
+            
+            // Close mobile menu if open
+            $('.navbar-collapse').removeClass('show');
+          }
         });
 
         // Pop up
-        $('.tm-gallery').magnificPopup({
+        $('.tm-education').magnificPopup({
           delegate: 'a',
           type: 'image',
           gallery: { enabled: true }
         });
 
-        $('.tm-testimonials-carousel').slick({
+        $('.tm-technical-skills-carousel').slick({
           dots: true,
           prevArrow: false,
           nextArrow: false,
@@ -566,7 +567,7 @@ https://www.tooplate.com/view/2117-infinite-loop
         });
 
         // Gallery
-        $('.tm-gallery').slick({
+        $('.tm-education').slick({
           dots: true,
           infinite: false,
           slidesToShow: 5,

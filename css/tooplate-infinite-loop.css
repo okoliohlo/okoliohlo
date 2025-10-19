@@ -80,8 +80,19 @@ blockquote {
   position: fixed;
   width: 100%;
   z-index: 1000;
+  top: 0;
   background-color: transparent;
   transition: all 0.3s ease;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure sections are properly positioned for navigation */
+section {
+  scroll-margin-top: 70px; /* Account for fixed navbar */
 }
 
 .tm-navbar.scroll {
@@ -113,6 +124,10 @@ blockquote {
   font-size: 0.9rem;
   padding: 8px 15px !important;
   white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
 }
 
 .tm-navbar.scroll .tm-nav-link {
@@ -192,8 +207,8 @@ blockquote {
   min-height: 100vh;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  padding-top: 100px;
+  justify-content: flex-start;
+  padding-top: 40vh;
   padding-bottom: 150px;
   position: relative;
   z-index: 10;
@@ -218,14 +233,14 @@ blockquote {
 
 .tm-hero-subtitle {
   text-shadow: 2px 2px 2px #333;
-  font-size: 1.43rem;
+  font-size: 1.72rem;
   margin-bottom: 0;
   color: #FFF;
 }
 
 .tm-intro-next {
   position: absolute;
-  bottom: 100px;
+  bottom: 20px;
   left: 0;
   right: 0;
   z-index: 1000;
@@ -237,7 +252,7 @@ blockquote {
   }
 
   .tm-intro-next {
-    bottom: 20px;
+    bottom: 10px;
   }
 }
 
@@ -302,28 +317,79 @@ blockquote {
   color: #FFF;
 }
 
-#whatwedo {
+#professional-experience {
   background-image: url(../img/office.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: scroll;
+  background-attachment: fixed;
   min-height: 100vh;
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
-#whatwedo .tm-content-box {
+/* Desktop optimization for proper image scaling */
+@media (min-width: 992px) {
+  #professional-experience {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1200px) {
+  #professional-experience {
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1400px) {
+  #professional-experience {
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
+#professional-experience .tm-content-box {
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
 }
 
-#whatwedo .col-lg-6 {
+#professional-experience .col-lg-6 {
   max-width: 70%;
   flex: 0 0 70%;
 }
 
-#whatwedo .tm-intro-text-container {
+/* Desktop layout optimization */
+@media (min-width: 992px) {
+  #professional-experience .col-lg-6 {
+    max-width: 65% !important;
+    flex: 0 0 65% !important;
+  }
+  
+  #professional-experience .tm-content-box {
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+}
+
+#professional-experience .tm-intro-text-container {
   font-size: 1.1495rem;
   font-weight: 700;
   color: #000;
@@ -333,40 +399,40 @@ blockquote {
   line-height: 0.92;
 }
 
-#whatwedo .tm-intro-text-container p {
+#professional-experience .tm-intro-text-container p {
   margin-bottom: 0.5rem;
   font-weight: 700;
   line-height: 0.92;
 }
 
-#whatwedo .tm-intro-text-container ul {
+#professional-experience .tm-intro-text-container ul {
   line-height: 0.736;
   margin-bottom: 1rem;
   font-weight: 700;
 }
 
-#whatwedo .tm-intro-text-container li {
+#professional-experience .tm-intro-text-container li {
   font-weight: 700;
 }
 
-#whatwedo .tm-intro-text-container .mb-5 {
+#professional-experience .tm-intro-text-container .mb-5 {
   margin-bottom: 2rem !important;
   padding-bottom: 2rem;
   border-bottom: 2px solid #335577;
 }
 
-#whatwedo .tm-intro-text-container .mb-5:last-child {
+#professional-experience .tm-intro-text-container .mb-5:last-child {
   border-bottom: none;
 }
 
-#whatwedo .tm-section-title {
+#professional-experience .tm-section-title {
   font-size: 3.146rem;
   font-weight: 700;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
   white-space: nowrap;
 }
 
-#whatwedo strong {
+#professional-experience strong {
   font-weight: 900;
 }
 
@@ -379,22 +445,22 @@ blockquote {
 	padding: 20px 0 30px 0;
 }
 
-/* Testimonials / Technical Skills */
-#testimonials {
+/* Technical Skills */
+#technical-skills {
   color: white;
   position: relative;
   overflow: hidden;
 }
 
-#testimonials .tm-section-title {
+#technical-skills .tm-section-title {
   font-size: 3.12rem;
 }
 
-#testimonials h4 {
+#technical-skills h4 {
   font-size: 1.44rem;
 }
 
-#testimonials .badge {
+#technical-skills .badge {
   font-size: 1.08rem;
   padding: 0.6rem 0.9rem !important;
   min-height: 36px !important;
@@ -402,53 +468,53 @@ blockquote {
   cursor: pointer;
 }
 
-#testimonials .badge:hover {
+#technical-skills .badge:hover {
   transform: scale(1.15) translateY(-5px);
   background-color: #38B !important;
   color: white !important;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-#testimonials .badge img {
+#technical-skills .badge img {
   width: 21.6px !important;
   height: 21.6px !important;
   margin-right: 7.2px !important;
   transition: transform 0.3s ease;
 }
 
-#testimonials .badge:hover img {
+#technical-skills .badge:hover img {
   transform: rotate(360deg);
 }
 
-#testimonials .skill-category {
+#technical-skills .skill-category {
   padding: 24px !important;
   position: relative;
   overflow: visible;
   z-index: 1;
 }
 
-/* Ensure testimonials section allows tooltips to overflow */
-#testimonials {
+/* Ensure technical-skills section allows tooltips to overflow */
+#technical-skills {
   position: relative;
   overflow: visible;
 }
 
-#testimonials .tm-testimonials-content {
+#technical-skills .tm-technical-skills-content {
   position: relative;
   overflow: visible;
 }
 
-#testimonials .container {
+#technical-skills .container {
   position: relative;
   overflow: visible;
 }
 
-#testimonials .row {
+#technical-skills .row {
   position: relative;
   overflow: visible;
 }
 
-#testimonials .col-md-6 {
+#technical-skills .col-md-6 {
   position: relative;
   overflow: visible;
 }
@@ -458,37 +524,189 @@ blockquote {
 .skill-badge-java,
 .skill-badge-javascript {
   overflow: visible !important;
-  position: relative;
-  z-index: 99999;
+  position: relative !important;
+  z-index: 1000 !important; /* Base z-index, will be elevated on interaction */
+  cursor: pointer !important;
 }
 
 .skill-description {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  margin-top: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  width: 450px;
-  max-width: 90vw;
-  z-index: 999999;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-sizing: border-box;
-  overflow: auto;
-  max-height: 80vh;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  margin-top: 0 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  padding: 15px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+  width: 450px !important;
+  max-width: 90vw !important;
+  z-index: 2147483647 !important; /* Maximum z-index value */
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+  box-sizing: border-box !important;
+  overflow: auto !important;
+  max-height: 80vh !important;
 }
 
-/* JavaScript specific - smaller to fit within block */
-.skill-badge-javascript .skill-description {
-  width: 95%;
-  max-width: 100%;
-  padding: 12px;
+/* Comprehensive Responsive Skill Description Boxes - All Screen Sizes */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .skill-description {
+    width: 500px !important;
+    max-width: 85vw !important;
+    padding: 20px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Standard Desktop (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .skill-description {
+    width: 450px !important;
+    max-width: 88vw !important;
+    padding: 18px !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Tablet Portrait (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .skill-description {
+    width: 90vw !important;
+    max-width: 600px !important;
+    padding: 20px !important;
+    max-height: 70vh !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 85vw !important;
+    max-width: 550px !important;
+  }
+}
+
+/* Large Mobile (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .skill-description {
+    width: 92vw !important;
+    max-width: 500px !important;
+    padding: 18px !important;
+    max-height: 75vh !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 90vw !important;
+    max-width: 450px !important;
+    padding: 16px !important;
+  }
+}
+
+/* Standard Mobile (375px - 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+  .skill-description {
+    width: 94vw !important;
+    max-width: 400px !important;
+    padding: 16px !important;
+    max-height: 80vh !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 92vw !important;
+    max-width: 380px !important;
+    padding: 14px !important;
+  }
+}
+
+/* Small Mobile (320px - 374px) */
+@media (min-width: 320px) and (max-width: 374px) {
+  .skill-description {
+    width: 96vw !important;
+    max-width: 350px !important;
+    padding: 14px !important;
+    max-height: 85vh !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 94vw !important;
+    max-width: 330px !important;
+    padding: 12px !important;
+  }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+  .skill-description {
+    width: 98vw !important;
+    max-width: 300px !important;
+    padding: 12px !important;
+    max-height: 90vh !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .skill-badge-javascript .skill-description {
+    width: 96vw !important;
+    max-width: 280px !important;
+    padding: 10px !important;
+  }
+}
+
+/* Landscape Mobile Optimization */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .skill-description {
+    max-height: 95vh !important;
+    width: 85vw !important;
+    max-width: 600px !important;
+    padding: 12px !important;
+  }
+  
+  .skill-description p {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* High DPI/Retina Display Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .skill-description {
+    border-radius: 14px !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9) !important;
+  }
 }
 
 .skill-description::before {
@@ -507,9 +725,86 @@ blockquote {
 .skill-badge-python:hover .skill-description,
 .skill-badge-java:hover .skill-description,
 .skill-badge-javascript:hover .skill-description {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 2147483647 !important;
+}
+
+/* When a skill badge is hovered, increase its z-index to be above other badges */
+.skill-badge-python:hover,
+.skill-badge-java:hover,
+.skill-badge-javascript:hover {
+  z-index: 2147483646 !important;
+}
+
+/* Touch device support for mobile */
+.skill-badge-python:active .skill-description,
+.skill-badge-java:active .skill-description,
+.skill-badge-javascript:active .skill-description {
+  transform: translate(-50%, -50%) scale(1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 2147483647 !important;
+}
+
+/* When a skill badge is active/touched, increase its z-index */
+.skill-badge-python:active,
+.skill-badge-java:active,
+.skill-badge-javascript:active {
+  z-index: 2147483646 !important;
+}
+
+/* Mobile Touch Optimization */
+@media (max-width: 991px) {
+  .skill-badge-python,
+  .skill-badge-java,
+  .skill-badge-javascript {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    touch-action: manipulation !important;
+  }
+  
+  /* Enhanced touch targets for mobile */
+  .skill-badge-python,
+  .skill-badge-java,
+  .skill-badge-javascript {
+    min-height: 44px !important; /* iOS recommended touch target */
+    min-width: 44px !important;
+    padding: 8px 12px !important;
+  }
+  
+  /* Mobile-specific hover states using :focus for accessibility */
+  .skill-badge-python:focus .skill-description,
+  .skill-badge-java:focus .skill-description,
+  .skill-badge-javascript:focus .skill-description {
+    transform: translate(-50%, -50%) scale(1) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 2147483647 !important;
+  }
+  
+  /* When a skill badge is focused, increase its z-index */
+  .skill-badge-python:focus,
+  .skill-badge-java:focus,
+  .skill-badge-javascript:focus {
+    z-index: 2147483646 !important;
+  }
+}
+
+/* Ensure skill descriptions appear above navigation and all other elements */
+.skill-description {
+  position: fixed !important;
+  z-index: 2147483647 !important; /* Maximum possible z-index */
+}
+
+/* Override any potential conflicting z-index values (excluding navbar) */
+.tm-hero,
+.tm-section,
+#technical-skills,
+.tm-technical-skills-content,
+.skill-category {
+  z-index: auto !important;
 }
 
 .skill-description p {
@@ -558,7 +853,7 @@ blockquote {
   }
 }
 
-.tm-testimonials-content {
+.tm-technical-skills-content {
   position: relative;
   z-index: 100;
 }
@@ -575,7 +870,7 @@ blockquote {
   z-index: 0;
 }
 
-.tm-testimonials-carousel {
+.tm-technical-skills-carousel {
   max-width: 1050px;
   margin: 0 auto;
 }
@@ -605,12 +900,12 @@ blockquote {
   font-size: 0.9rem;
 }
 
-.tm-gallery-container {
+.tm-education-container {
   padding-top: 70px;
   padding-bottom: 120px;
 }
 
-.tm-gallery-item {
+.tm-education-item {
   margin: 0 15px;
 }
 
@@ -629,14 +924,14 @@ blockquote {
   color: #3ba0dd;
 }
 
-.tm-testimonials-carousel .slick-dots li button:before {
+.tm-technical-skills-carousel .slick-dots li button:before {
   color: white;
   opacity: 0.5;
 }
 
-.tm-testimonials-carousel .slick-dots li button:hover:before,
-.tm-testimonials-carousel .slick-dots li button:focus:before,
-.tm-testimonials-carousel .slick-dots li.slick-active button:before {
+.tm-technical-skills-carousel .slick-dots li button:hover:before,
+.tm-technical-skills-carousel .slick-dots li button:focus:before,
+.tm-technical-skills-carousel .slick-dots li.slick-active button:before {
   color: white;
   opacity: 1;
 }
@@ -782,7 +1077,7 @@ figure.effect-honey:hover h2 i {
   transform: translate3d(0, 0, 0);
 }
 
-.tm-container-gallery {
+.tm-container-education {
 	padding-top: 30px;
 	}
 
@@ -791,13 +1086,31 @@ figure.effect-honey:hover h2 i {
 #contact {
   color: white;
   background-color: #001828;
-  background-image: url(../img/infinite-loop-03.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 980px;
   position: relative;
-  padding-bottom: 50px;
-  padding-top: 100px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#contact .tm-video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+#contact .tm-container-contact {
+  position: relative;
+  z-index: 2;
+  padding: 100px 0;
 }
 
 .contact-item {
@@ -906,7 +1219,7 @@ p {
     max-width: 1275px;
   }
 
-  .tm-container-gallery {
+  .tm-container-education {
     max-width: 1290px;
   }
 
@@ -956,13 +1269,13 @@ p {
 }
 
 @media (max-width: 480px) {
-  .tm-gallery-container {
+  .tm-education-container {
     max-width: 220px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .tm-gallery-container-2 {
+  .tm-education-container-2 {
     max-width: 350px;
   }
 
@@ -970,7 +1283,7 @@ p {
     margin: 0 8px;
   }
 
-  .tm-gallery-item {
+  .tm-education-item {
     margin: 0;
   }
 }
@@ -981,35 +1294,35 @@ p {
 
 /* Fix 1: Professional Experience section - full width on mobile */
 @media (max-width: 991px) {
-  #whatwedo .col-lg-6 {
+  #professional-experience .col-lg-6 {
     max-width: 100% !important;
     flex: 0 0 100% !important;
   }
   
-  #whatwedo .tm-intro-text-container {
+  #professional-experience .tm-intro-text-container {
     line-height: 1.5 !important;
     padding: 0 5%;
   }
   
-  #whatwedo .tm-intro-text-container p {
+  #professional-experience .tm-intro-text-container p {
     line-height: 1.6 !important;
   }
   
-  #whatwedo .tm-intro-text-container ul {
+  #professional-experience .tm-intro-text-container ul {
     line-height: 1.6 !important;
   }
   
-  #whatwedo .tm-intro-text-container li {
+  #professional-experience .tm-intro-text-container li {
     margin-bottom: 0.5rem;
   }
   
-  #whatwedo .tm-section-title {
+  #professional-experience .tm-section-title {
     font-size: 2.2rem !important;
     white-space: normal !important;
   }
   
   /* Better background positioning on tablets */
-  #whatwedo {
+  #professional-experience {
     background-attachment: scroll !important;
     background-size: cover !important;
     background-position: center center !important;
@@ -1017,7 +1330,7 @@ p {
 }
 
 @media (max-width: 767px) {
-  #whatwedo {
+  #professional-experience {
     background-image: url(../img/office.png) !important;
     background-size: cover !important;
     background-position: 50% 30% !important;
@@ -1028,12 +1341,119 @@ p {
   }
 }
 
-@media (max-width: 480px) {
-  #whatwedo {
+/* Comprehensive Experience Section Image Optimization - All Screen Sizes */
+
+/* Tablet Portrait (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  #professional-experience {
     background-size: cover !important;
-    background-position: center 20% !important;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    min-height: 80vh !important;
+    padding: 60px 0 !important;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 30px !important;
+    border-radius: 8px !important;
+    margin: 20px !important;
+  }
+}
+
+/* Standard Mobile (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  #professional-experience {
+    background-image: url(../img/office.png) !important;
+    background-size: cover !important;
+    background-position: center 40% !important;
+    background-attachment: scroll !important;
+    min-height: 70vh !important;
+    padding: 50px 0 !important;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 25px !important;
+    border-radius: 8px !important;
+    margin: 15px !important;
+  }
+}
+
+/* Small Mobile (320px - 480px) */
+@media (min-width: 320px) and (max-width: 480px) {
+  #professional-experience {
+    background-image: url(../img/office.png) !important;
+    background-size: cover !important;
+    background-position: center 30% !important;
+    background-attachment: scroll !important;
+    min-height: 60vh !important;
+    padding: 40px 0 !important;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 20px !important;
+    border-radius: 6px !important;
+    margin: 10px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  #professional-experience .tm-section-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+  #professional-experience {
+    background-image: url(../img/office.png) !important;
+    background-size: cover !important;
+    background-position: center 25% !important;
+    background-attachment: scroll !important;
+    min-height: 50vh !important;
+    padding: 30px 0 !important;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 15px !important;
+    border-radius: 4px !important;
+    margin: 8px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  #professional-experience .tm-section-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Landscape Mobile Optimization */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  #professional-experience {
+    background-size: cover !important;
+    background-position: center center !important;
+    min-height: 100vh !important;
+    padding: 20px 0 !important;
+  }
+  
+  #professional-experience .tm-intro-text-container {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 15px !important;
+    border-radius: 6px !important;
+    margin: 10px !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* High DPI/Retina Display Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #professional-experience {
+    background-image: url(../img/office.png) !important;
+    background-size: cover !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
   }
 }
 
@@ -1044,7 +1464,7 @@ p {
   }
   
   .tm-hero-subtitle {
-    font-size: 1.2rem !important;
+    font-size: 1.44rem !important;
   }
   
   #infinite .tm-intro-text {
@@ -1063,7 +1483,7 @@ p {
   }
   
   .tm-hero-subtitle {
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
   }
   
   #infinite .tm-intro-text {
@@ -1077,7 +1497,7 @@ p {
     display: none !important;
   }
   
-  #testimonials {
+  #technical-skills {
     background: linear-gradient(135deg, #1a4d5d 0%, #2d5a6b 100%);
     background-size: cover;
     background-attachment: scroll;
@@ -1085,7 +1505,7 @@ p {
 }
 
 @media (max-width: 480px) {
-  #testimonials {
+  #technical-skills {
     background: linear-gradient(135deg, #1a4d5d 0%, #2d5a6b 100%);
     min-height: auto;
     padding-top: 60px;
@@ -1130,27 +1550,27 @@ p {
   }
   
   /* Make skill badges more mobile-friendly */
-  #testimonials .badge {
+  #technical-skills .badge {
     font-size: 0.95rem !important;
     padding: 0.5rem 0.7rem !important;
     margin: 0.2rem !important;
   }
   
-  #testimonials .skill-category {
+  #technical-skills .skill-category {
     padding: 15px !important;
     overflow: visible !important;
   }
   
-  #testimonials h4 {
+  #technical-skills h4 {
     font-size: 1.2rem !important;
   }
   
   /* Ensure all parent containers allow overflow */
-  #testimonials,
-  #testimonials .tm-testimonials-content,
-  #testimonials .container,
-  #testimonials .row,
-  #testimonials .col-md-6 {
+  #technical-skills,
+  #technical-skills .tm-technical-skills-content,
+  #technical-skills .container,
+  #technical-skills .row,
+  #technical-skills .col-md-6 {
     overflow: visible !important;
   }
 }
@@ -1164,6 +1584,29 @@ p {
   
   .skill-description p {
     font-size: 0.8rem !important;
+  }
+  
+  /* Extra small mobile video optimization */
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    transform: none !important;
+    z-index: 1 !important;
+  }
+  
+  #contact {
+    min-height: 100vh !important;
+    padding: 60px 10px 30px 10px !important;
+  }
+  
+  #contact .tm-container-contact {
+    padding: 60px 10px 30px 10px !important;
   }
 }
 
@@ -1186,6 +1629,27 @@ p {
   
   #contact {
     padding-top: 80px;
+    min-height: 100vh;
+  }
+  
+  /* Mobile video background optimization */
+  #contact .tm-video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    object-fit: cover;
+    transform: none;
+    z-index: 1;
+  }
+  
+  #contact .tm-container-contact {
+    position: relative;
+    z-index: 2;
+    padding: 80px 15px 40px 15px;
   }
 }
 
@@ -1217,7 +1681,7 @@ p {
     font-size: 1.9rem !important;
   }
   
-  #testimonials .tm-section-title {
+  #technical-skills .tm-section-title {
     font-size: 2.1rem !important;
   }
 }
@@ -1227,7 +1691,7 @@ p {
     font-size: 1.6rem !important;
   }
   
-  #testimonials .tm-section-title {
+  #technical-skills .tm-section-title {
     font-size: 1.8rem !important;
   }
 }
@@ -1252,23 +1716,276 @@ p {
     margin-top: 30px;
   }
   
-  /* Optimize parallax sections for mobile */
+  /* Mobile video background - use viewport units for better scaling */
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    transform: none !important;
+    z-index: 1 !important;
+  }
+  
   #contact {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    min-height: auto !important;
+    min-height: 100vh !important;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    position: relative;
   }
 }
 
-@media (max-width: 480px) {
+/* Comprehensive Mobile Video Optimization - All Screen Sizes */
+
+/* Large Mobile/Small Tablet (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  #contact .tm-video-background {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+  }
+  
   #contact {
-    background-image: url(../img/infinite-loop-03.jpg) !important;
-    background-size: cover !important;
-    background-position: center 40% !important;
-    background-attachment: scroll !important;
-    min-height: auto !important;
-    padding-top: 60px;
-    padding-bottom: 40px;
+    min-height: 100vh !important;
+    position: relative !important;
+  }
+}
+
+/* Standard Mobile (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+  }
+}
+
+/* Large Phones (414px - 480px) - iPhone Pro Max, etc. */
+@media (min-width: 414px) and (max-width: 480px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+}
+
+/* Standard Phones (375px - 413px) - iPhone 12, 13, 14 */
+@media (min-width: 375px) and (max-width: 413px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+}
+
+/* Small Phones (320px - 374px) - iPhone SE, older Android */
+@media (min-width: 320px) and (max-width: 374px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  
+  #contact {
+    padding: 40px 8px 25px 8px !important;
+  }
+  
+  #contact .tm-container-contact {
+    padding: 40px 8px 25px 8px !important;
+  }
+}
+
+/* Extra Small Devices (below 320px) */
+@media (max-width: 319px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+  }
+  
+  #contact {
+    padding: 35px 5px 20px 5px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Landscape Orientation Optimization */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    z-index: 1 !important;
+  }
+  
+  #contact {
+    padding: 20px 15px !important;
+  }
+  
+  #contact .tm-container-contact {
+    padding: 20px 15px !important;
+  }
+}
+
+/* iPhone 12 Mini and similar small iOS devices optimization */
+@media only screen 
+  and (device-width: 375px) 
+  and (device-height: 812px) 
+  and (-webkit-device-pixel-ratio: 3),
+@media only screen 
+  and (max-width: 375px) 
+  and (max-height: 812px) {
+  
+  #contact {
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important; /* iOS Safari fix */
+    padding: 50px 10px 30px 10px !important;
+    overflow: hidden !important;
+  }
+  
+  #contact .tm-video-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important; /* iOS Safari viewport fix */
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+    z-index: 1 !important;
+    /* iOS video optimization */
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  
+  #contact .tm-container-contact {
+    position: relative !important;
+    z-index: 2 !important;
+    padding: 50px 15px 30px 15px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Form optimization for iPhone 12 Mini */
+  #contact .tm-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px 15px !important;
+    margin-bottom: 15px !important;
+    box-sizing: border-box !important;
+  }
+  
+  #contact .tm-btn-submit {
+    width: 100% !important;
+    font-size: 16px !important;
+    padding: 12px 20px !important;
+    margin-top: 10px !important;
+  }
+  
+  /* Contact items spacing for small screens */
+  .contact-item {
+    margin-left: 0 !important;
+    margin-bottom: 20px !important;
+    padding: 10px 0 !important;
+  }
+  
+  .item-link {
+    padding: 15px 0 !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .item-link i {
+    margin-right: 15px !important;
+  }
+  
+  /* Section title optimization */
+  #contact .tm-section-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 20px !important;
+  }
+  
+  #contact p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+/* Additional iOS Safari fixes for safe areas */
+@media screen and (max-width: 414px) {
+  #contact {
+    /* Fix for iOS Safari bottom bar */
+    min-height: calc(100vh - env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(40px + env(safe-area-inset-bottom)) !important;
+  }
+  
+  #contact .tm-video-background {
+    /* Ensure video covers safe areas */
+    height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom)) !important;
+    top: calc(0px - env(safe-area-inset-top)) !important;
   }
 }
