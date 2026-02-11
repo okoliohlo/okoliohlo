@@ -492,15 +492,15 @@ https://www.tooplate.com/view/2117-infinite-loop
       };
 
       $(function(){
-        // Hero Section - Background Parallax
-        background_image_parallax($(".tm-parallax"), 0.30, false);
+        // Hero Section - Background Parallax (disabled to keep image position fixed)
+        // background_image_parallax($(".tm-parallax"), 0.30, false);
         background_image_parallax_2($("#contact"), 0.80);
         background_image_parallax_2($("#technical-skills"), 0.80);
 
-        // Handle window resize
-        window.addEventListener('resize', function(){
-          background_image_parallax($(".tm-parallax"), 0.30, true);
-        }, true);
+        // Handle window resize (disabled for hero)
+        // window.addEventListener('resize', function(){
+        //   background_image_parallax($(".tm-parallax"), 0.30, true);
+        // }, true);
 
         // Detect window scroll and update navbar
         $(window).scroll(function(e){
