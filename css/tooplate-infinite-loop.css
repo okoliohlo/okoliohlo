@@ -374,6 +374,8 @@ section {
 #professional-experience .col-lg-6 {
   max-width: 70%;
   flex: 0 0 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Desktop layout optimization */
