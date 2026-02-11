@@ -165,9 +165,9 @@ section {
 #infinite {
 	background-color: #222;
   background-image: url(../img/IMG_3167.jpeg?v=2);
-  background-size: contain;
+  background-size: 50%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: 90% 50%;
   background-attachment: scroll;
   min-height: 100vh;
   height: auto;
@@ -186,11 +186,19 @@ section {
 
 @media (max-width: 767px) {
   #infinite {
-    background-image: url(../img/IMG_3167.jpeg) !important;
+    background-image: url(../img/IMG_3167-mobile.jpeg) !important;
     background-size: cover !important;
     background-position: 50% 20% !important;
     background-attachment: scroll !important;
     min-height: 100vh;
+  }
+  
+  .tm-hero-text-container {
+    width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    padding-top: 30vh !important;
+    text-align: center !important;
   }
 }
 
@@ -203,21 +211,23 @@ section {
 }
 
 .tm-hero-text-container {
-  width: 100%;
+  width: 55%;
   min-height: 100vh;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  padding-top: 40vh;
+  padding-top: 20vh;
   padding-bottom: 150px;
+  padding-left: 0%;
   position: relative;
   z-index: 10;
+  text-align: left;
 }
 
 .tm-hero-text-container-inner {
   margin-top: 0;
   max-width: 1200px;
-  margin-left: auto;
+  margin-left: 2cm;
   margin-right: auto;
   padding: 0 20px;
   position: relative;
