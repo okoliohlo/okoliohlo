@@ -5,7 +5,20 @@ Script to run UI BDD tests using Behave
 import sys
 import os
 import shutil
+import yaml
 from pathlib import Path
+
+VALID_ENVS = None
+
+
+def _load_valid_envs():
+    """Load valid environment names from environments.yaml"""
+    global VALID_ENVS
+    if VALID_ENVS is None:
+        config_file = Path(__file__).parent / "config" / "environments.yaml"
+        with open(config_file, 'r') as f:
+            VALID_ENVS = list(yaml.safe_load(f).keys())
+    return VALID_ENVS
 
 
 def clean_allure_reports():
@@ -40,11 +53,11 @@ def run_ui_tests(args=None, clean_reports=False):
         args: Additional behave arguments (optional)
     
     Examples:
-        python run_bdd_tests.py                    # Run all UI tests
-        python run_bdd_tests.py --clean            # Clean reports before running
-        python run_bdd_tests.py --tags=@smoke      # Run smoke tests only
-        python run_bdd_tests.py --tags=~@wip       # Exclude WIP tests
-        python run_bdd_tests.py -f html -o reports/behave-report.html  # HTML report
+        python run_bdd_tests.py --env=qa             # Run all UI tests on QA
+        python run_bdd_tests.py --env=staging --clean # Clean reports before running
+        python run_bdd_tests.py --env=demo --tags=@smoke  # Run smoke tests on demo
+        python run_bdd_tests.py --env=local --tags=~@wip  # Exclude WIP tests
+        python run_bdd_tests.py --env=qa -f html -o reports/behave-report.html
 
         #generate allure:
             allure generate reports\allure-results -o reports\allure-report --clean
@@ -110,10 +123,35 @@ if __name__ == "__main__":
     # Check for --clean flag
     clean_reports = "--clean" in sys.argv
     
-    # Pass any additional arguments to behave (excluding --clean)
-    additional_args = [arg for arg in sys.argv[1:] if arg != "--clean"]
+    # Extract --env argument
+    env_value = None
+    remaining_args = []
+    for arg in sys.argv[1:]:
+        if arg == "--clean":
+            continue
+        if arg.startswith("--env="):
+            env_value = arg.split("=", 1)[1]
+        elif arg == "--env":
+            print("[ERROR] --env requires a value, e.g. --env=qa")
+            sys.exit(2)
+        else:
+            remaining_args.append(arg)
     
-    exit_code = run_ui_tests(additional_args, clean_reports=clean_reports)
+    if env_value is None:
+        valid = _load_valid_envs()
+        print(f"[ERROR] --env is required. Valid environments: {', '.join(valid)}")
+        print(f"Usage: python run_bdd_tests.py --env=<environment> [options]")
+        sys.exit(2)
+    
+    valid_envs = _load_valid_envs()
+    if env_value not in valid_envs:
+        print(f"[ERROR] Unknown environment '{env_value}'. Valid: {', '.join(valid_envs)}")
+        sys.exit(2)
+    
+    os.environ["TEST_ENV"] = env_value
+    print(f"Environment: {env_value}")
+    
+    exit_code = run_ui_tests(remaining_args, clean_reports=clean_reports)
     
     print("-" * 80)
     if exit_code == 0:

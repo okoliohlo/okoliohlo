@@ -152,4 +152,4 @@ class ClassifierAgent:
             return f"Classified as {ftype.value} with {level} confidence"
         primary = indicators[0]
         extra = f" (and {len(indicators) - 1} more)" if len(indicators) > 1 else ""
-        return f"Detected '{primary}'{extra} → {ftype.value} ({level} confidence)"
+        return f"Detected '{primary}'{extra} -> {ftype.value} ({level} confidence)"

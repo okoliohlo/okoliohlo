@@ -107,7 +107,7 @@ class ExecutorAgent:
                 new_selector = result.new_selector or self._discover_selector(result.locator)
 
                 logger.info(
-                    f"[Executor] Healed by {strategy.name} → '{new_selector}' "
+                    f"[Executor] Healed by {strategy.name} -> '{new_selector}' "
                     f"(confidence={result.confidence:.2f})"
                 )
 
@@ -280,13 +280,43 @@ class ExecutorAgent:
                 return f"[aria-label='{aria}']"
 
             # 5. Unique class combination
+            tag = element.evaluate("el => el.tagName.toLowerCase()")
             classes = element.evaluate("el => el.className")
-            if classes:
-                selector = "." + ".".join(classes.split())
+            class_part = "." + ".".join(classes.split()) if classes else ""
+
+            if class_part:
+                selector = class_part
                 if self.page.locator(selector).count() == 1:
                     return selector
 
-            # 6. XPath fallback
+            # 6. Tag + classes
+            if tag and class_part:
+                selector = f"{tag}{class_part}"
+                if self.page.locator(selector).count() == 1:
+                    return selector
+
+            # 7. Classes/tag + href (critical for links)
+            href = element.evaluate("el => el.getAttribute('href')")
+            if href:
+                for base in [f"{tag}{class_part}", class_part, tag]:
+                    if not base:
+                        continue
+                    selector = f"{base}[href='{href}']"
+                    if self.page.locator(selector).count() == 1:
+                        return selector
+
+            # 8. Classes/tag + type, role, or placeholder
+            for attr in ("type", "role", "placeholder"):
+                val = element.evaluate(f"el => el.getAttribute('{attr}')")
+                if val:
+                    for base in [f"{tag}{class_part}", class_part, tag]:
+                        if not base:
+                            continue
+                        selector = f"{base}[{attr}='{val}']"
+                        if self.page.locator(selector).count() == 1:
+                            return selector
+
+            # 9. XPath fallback
             xpath = element.evaluate("""
                 el => {
                     const parts = [];
