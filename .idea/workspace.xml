@@ -1,63 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="232cd782-98f5-4b1f-af66-60474eae0a31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/koliohlo_web_profile.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNAME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/tooplate-infinite-loop.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/css/all.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-brands-400.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-brands-400.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-brands-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-brands-400.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-brands-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-regular-400.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-regular-400.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-regular-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-regular-400.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-regular-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-solid-900.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-solid-900.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-solid-900.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-solid-900.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fontawesome-5.5/webfonts/fa-solid-900.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/3676821983-preview.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_3167-mobile.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/IMG_3167.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/coding.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/infinite-loop-03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/office.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/sapce.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/typing.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/easing.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery-1.9.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.singlePageNav.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/magnific-popup/jquery.magnific-popup.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/magnific-popup/magnific-popup.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/ajax-loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/config.rb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/fonts/slick.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/fonts/slick.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/fonts/slick.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/fonts/slick.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick-theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick-theme.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick-theme.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slick/slick.scss" beforeDir="false" />
-    </list>
+    <list default="true" id="232cd782-98f5-4b1f-af66-60474eae0a31" name="Changes" comment="restructure profile pr revert" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,35 +10,35 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "okoliohlo"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;okoliohlo&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/okoliohlo/okoliohlo.git",
-    "accountId": "d21a4c1c-c720-4ac4-9bd6-631e5638c6a0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/okoliohlo/okoliohlo.git&quot;,
+    &quot;accountId&quot;: &quot;d21a4c1c-c720-4ac4-9bd6-631e5638c6a0&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="3CB6U60kzEFXQEmCSdEBULhYSGJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -110,6 +54,28 @@
       <option name="presentableId" value="Default" />
       <updated>1775846628862</updated>
     </task>
+    <task id="LOCAL-00001" summary="restructure profile pr">
+      <option name="closed" value="true" />
+      <created>1775847358286</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1775847358286</updated>
+    </task>
+    <task id="LOCAL-00002" summary="restructure profile pr revert">
+      <option name="closed" value="true" />
+      <created>1775847491947</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775847491947</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="restructure profile pr" />
+    <MESSAGE value="restructure profile pr revert" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructure profile pr revert" />
   </component>
 </project>
