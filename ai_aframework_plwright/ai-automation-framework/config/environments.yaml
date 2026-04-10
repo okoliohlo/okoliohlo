@@ -133,3 +133,6 @@ demo:
     ai_analysis: true
     parallel_execution: false
     video_recording: true
+    source_auto_update: true
+    source_update_mode: prompt
+    min_confidence_for_update: 0.85

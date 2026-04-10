@@ -5,6 +5,7 @@ Provides common methods for all page objects
 
 from typing import Optional, List
 from playwright.sync_api import Page, Locator, expect
+from ai.self_healing.source_updater import SourceUpdater
 from utilities.logger import get_logger
 import allure
 import io
@@ -96,6 +97,16 @@ class BasePage:
                 if healing_result.success:
                     logger.info(f"Self-healing successful! New selector: {healing_result.new_selector}")
                     healing_result.locator.click()
+                    
+                    # Controlled source code update
+                    SourceUpdater().update_if_approved(
+                        page_object=self,
+                        old_selector=selector,
+                        new_selector=healing_result.new_selector,
+                        element_name=element_name,
+                        confidence=healing_result.confidence,
+                        strategy=healing_result.strategy or "",
+                    )
                     
                     if take_screenshot:
                         self.page.wait_for_timeout(500)
