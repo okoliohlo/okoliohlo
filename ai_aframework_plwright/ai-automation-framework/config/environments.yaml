@@ -1,0 +1,135 @@
+# Environment Configurations
+
+qa:
+  name: "QA"
+  base_url: "https://carelink-stage1-next.minimed.eu"
+  api_base_url: "https://api-qa.example.com"
+  browser: "chromium"
+  headless: false
+  timeout: 30000
+  viewport_width: 1920
+  viewport_height: 1080
+
+  credentials:
+    standard:
+      username: "standard_user@test.com"
+      password: "Test@123"
+    admin:
+      username: "admin@test.com"
+      password: "Admin@123"
+    premium:
+      username: "premium@test.com"
+      password: "Premium@123"
+
+  database:
+    host: "qa-db.example.com"
+    port: 5432
+    name: "qa_testdb"
+    username: "qa_user"
+    password: "${DB_PASSWORD}"
+
+  features:
+    self_healing: true
+    ai_analysis: true
+    parallel_execution: true
+    video_recording: true
+
+staging:
+  name: "Staging"
+  base_url: "https://carelink-stage1-next.minimed.eu"
+  api_base_url: "https://carelink-stage1-next.minimed.eu"
+  browser: "chromium"
+  headless: false
+  timeout: 30000
+  viewport_width: 1920
+  viewport_height: 1080
+
+  credentials:
+    standard:
+      username: "PMP1762376204"
+      password: "PostmanUser2023!"
+    admin:
+      username: "admin@staging.com"
+      password: "AdminStaging@123"
+
+  database:
+    host: "staging-db.example.com"
+    port: 5432
+    name: "staging_testdb"
+    username: "staging_user"
+    password: "${DB_PASSWORD}"
+
+  features:
+    self_healing: true
+    ai_analysis: true
+    parallel_execution: true
+    video_recording: false
+
+production:
+  name: "Production"
+  base_url: "https://www.example.com"
+  api_base_url: "https://api.example.com"
+  browser: "chromium"
+  headless: true
+  timeout: 30000
+  viewport_width: 1920
+  viewport_height: 1080
+
+  credentials:
+    standard:
+      username: "prod_user@example.com"
+      password: "${PROD_PASSWORD}"
+
+  features:
+    self_healing: false
+    ai_analysis: true
+    parallel_execution: false
+    video_recording: false
+
+local:
+  name: "Local"
+  base_url: "http://localhost:3000"
+  api_base_url: "http://localhost:8000"
+  browser: "chromium"
+  headless: false
+  timeout: 30000
+  viewport_width: 1920
+  viewport_height: 1080
+
+  credentials:
+    standard:
+      username: "local_user@test.com"
+      password: "Local@123"
+    admin:
+      username: "admin@test.com"
+      password: "Admin@123"
+
+  features:
+    self_healing: true
+    ai_analysis: true
+    parallel_execution: false
+    video_recording: true
+
+demo:
+  name: "Demo"
+  base_url:  "https://profile.okoliohlo.com/"
+  api_base_url: "http://localhost:8000"
+  browser: "chromium"
+  headless: false
+  timeout: 30000
+  viewport_width: 1920
+  viewport_height: 1080
+
+  credentials:
+    standard:
+      username: "local_user@test.com"
+      password: "Local@123"
+    admin:
+      username: "admin@test.com"
+      password: "Admin@123"
+
+  features:
+    self_healing: true
+    ai_analysis: true
+    parallel_execution: false
+    video_recording: true

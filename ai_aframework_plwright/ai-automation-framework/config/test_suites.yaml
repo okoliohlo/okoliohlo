@@ -1,0 +1,76 @@
+# Test Suite Definitions
+
+smoke:
+  name: "Smoke Test Suite"
+  description: "Critical path tests"
+  parallel: true
+  workers: 2
+  tests:
+    - "tests/ui/test_login.py::TestLogin::test_successful_login"
+    - "tests/api/test_auth_api.py::TestAuthAPI::test_login_api"
+    - "tests/ui/test_search.py::TestSearch::test_basic_search"
+
+  markers:
+    - smoke
+    - critical
+
+  timeout: 300  # 5 minutes
+  retry_count: 1
+
+regression:
+  name: "Regression Test Suite"
+  description: "Full regression suite"
+  parallel: true
+  workers: 4
+  tests:
+    - "tests/ui/"
+    - "tests/api/"
+
+  markers:
+    - regression
+
+  timeout: 3600  # 60 minutes
+  retry_count: 2
+
+api_only:
+  name: "API Test Suite"
+  description: "API tests only"
+  parallel: true
+  workers: 6
+  tests:
+    - "tests/api/"
+
+  markers:
+    - api
+
+  timeout: 1800  # 30 minutes
+  retry_count: 1
+
+ui_only:
+  name: "UI Test Suite"
+  description: "UI tests only"
+  parallel: true
+  workers: 3
+  tests:
+    - "tests/ui/"
+
+  markers:
+    - ui
+
+  timeout: 2400  # 40 minutes
+  retry_count: 2
+
+integration:
+  name: "Integration Test Suite"
+  description: "End-to-end integration tests"
+  parallel: false
+  workers: 1
+  tests:
+    - "tests/integration/"
+
+  markers:
+    - integration
+    - e2e
+
+  timeout: 1800  # 30 minutes
+  retry_count: 1

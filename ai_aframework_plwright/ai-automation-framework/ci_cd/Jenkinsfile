@@ -1,0 +1,191 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['qa', 'staging', 'production'],
+            description: 'Target environment'
+        )
+        choice(
+            name: 'TEST_SUITE',
+            choices: ['smoke', 'regression', 'api_only', 'ui_only', 'full'],
+            description: 'Test suite to execute'
+        )
+        choice(
+            name: 'BROWSER',
+            choices: ['chromium', 'firefox', 'webkit'],
+            description: 'Browser for UI tests'
+        )
+        string(
+            name: 'PARALLEL_WORKERS',
+            defaultValue: '4',
+            description: 'Number of parallel workers'
+        )
+    }
+
+    environment {
+        PYTHON_VERSION = '3.11'
+        VENV_DIR = 'venv'
+        TEST_ENV = "${params.ENVIRONMENT}"
+        SELF_HEALING = 'true'
+        AI_ANALYSIS = 'true'
+        VIDEO_RECORDING = 'onfailure'
+    }
+
+    stages {
+        stage('Setup') {
+            steps {
+                echo "Setting up test environment..."
+                sh '''
+                    python3 -m venv ${VENV_DIR}
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                    playwright install
+                '''
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                echo "Running code quality checks..."
+                sh '''
+                    . ${VENV_DIR}/bin/activate
+                    flake8 tests/ business/ core/ --max-line-length=120 --ignore=E501,W503
+                '''
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo "Running ${params.TEST_SUITE} tests on ${params.ENVIRONMENT}..."
+                sh """
+                    . ${VENV_DIR}/bin/activate
+
+                    pytest tests/ \\
+                        --env=${params.ENVIRONMENT} \\
+                        --browser=${params.BROWSER} \\
+                        --headless=true \\
+                        -n ${params.PARALLEL_WORKERS} \\
+                        -m ${params.TEST_SUITE} \\
+                        --alluredir=reports/allure-results \\
+                        --html=reports/report.html \\
+                        --self-contained-html \\
+                        -v
+                """
+            }
+        }
+
+        stage('Generate Reports') {
+            steps {
+                echo "Generating Allure report..."
+                sh '''
+                    allure generate reports/allure-results -o reports/allure-report --clean
+                '''
+            }
+        }
+
+        stage('Analyze Results') {
+            steps {
+                echo "Analyzing test results..."
+                script {
+                    def testResults = readJSON file: 'reports/test_execution_data.json'
+                    def passRate = testResults.pass_rate
+
+                    if (passRate < 95) {
+                        currentBuild.result = 'UNSTABLE'
+                        echo "Warning: Pass rate (${passRate}%) is below threshold"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Publish Allure report
+            allure([
+                includeProperties: false,
+                jdk: '',
+                properties: [],
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'reports/allure-results']]
+            ])
+
+            // Publish HTML report
+            publishHTML([
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports',
+                reportFiles: 'report.html',
+                reportName: 'Test Report'
+            ])
+
+            // Archive artifacts
+            archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
+
+            // Cleanup
+            cleanWs()
+        }
+
+        success {
+            echo "✅ Test execution successful!"
+
+            // Send success notification
+            emailext(
+                subject: "✅ Tests Passed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    Test Suite: ${params.TEST_SUITE}
+                    Environment: ${params.ENVIRONMENT}
+                    Browser: ${params.BROWSER}
+
+                    Status: SUCCESS
+
+                    View Report: ${env.BUILD_URL}allure
+                """,
+                to: "${env.EMAIL_RECIPIENTS}"
+            )
+        }
+
+        failure {
+            echo "❌ Test execution failed!"
+
+            // Send failure notification
+            emailext(
+                subject: "❌ Tests Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    Test Suite: ${params.TEST_SUITE}
+                    Environment: ${params.ENVIRONMENT}
+                    Browser: ${params.BROWSER}
+
+                    Status: FAILURE
+
+                    View Report: ${env.BUILD_URL}allure
+                    View Logs: ${env.BUILD_URL}console
+                """,
+                to: "${env.EMAIL_RECIPIENTS}"
+            )
+        }
+
+        unstable {
+            echo "⚠️ Test execution unstable!"
+
+            // Send unstable notification
+            emailext(
+                subject: "⚠️ Tests Unstable - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    Test Suite: ${params.TEST_SUITE}
+                    Environment: ${params.ENVIRONMENT}
+
+                    Status: UNSTABLE
+                    Some tests failed or pass rate below threshold.
+
+                    View Report: ${env.BUILD_URL}allure
+                """,
+                to: "${env.EMAIL_RECIPIENTS}"
+            )
+        }
+    }
+}

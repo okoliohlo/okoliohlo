@@ -1,0 +1,16 @@
+Feature: CareLink Login # tests/ui/features/login.feature:1
+  As a user of the CareLink application
+  I want to be able to log in
+  So that I can access my account
+  Feature: CareLink Login  # tests/ui/features/login.feature:1
+
+  @smoke @ui @tc01
+  Scenario: User opens page and navigates to login  # tests/ui/features/login.feature:10
+    Given I am using the "staging" environment      # tests/ui/steps/common_steps.py:113
+    When I open the CareLink page                   # tests/ui/steps/login_steps.py:206
+    Then I should see the CareLink homepage         # tests/ui/steps/login_steps.py:240
+    When I click the sign in button                 # tests/ui/steps/login_steps.py:211
+    Then I should see the login form                # tests/ui/steps/login_steps.py:250
+    When I login as "standard" user                 # tests/ui/steps/login_steps.py:231
+    Then I should be logged in successfully         # tests/ui/steps/login_steps.py:255
+

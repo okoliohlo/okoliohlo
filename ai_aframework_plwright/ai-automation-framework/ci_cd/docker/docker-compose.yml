@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  test-runner:
+    build:
+      context: ../..
+      dockerfile: ci_cd/docker/Dockerfile
+    container_name: automation-test-runner
+    environment:
+      - TEST_ENV=${TEST_ENV:-qa}
+      - BROWSER=${BROWSER:-chromium}
+      - PARALLEL_WORKERS=${PARALLEL_WORKERS:-4}
+      - SELF_HEALING=${SELF_HEALING:-true}
+      - AI_ANALYSIS=${AI_ANALYSIS:-true}
+      - VIDEO_RECORDING=${VIDEO_RECORDING:-onfailure}
+    volumes:
+      - ../../reports:/automation/reports
+      - ../../test_data:/automation/test_data
+    command: >
+      pytest tests/
+      --env=${TEST_ENV:-qa}
+      --browser=${BROWSER:-chromium}
+      --headless=true
+      -n ${PARALLEL_WORKERS:-4}
+      -m ${TEST_SUITE:-smoke}
+      --alluredir=reports/allure-results
+      -v
+    networks:
+      - test-network
+
+  allure-server:
+    image: frankescobar/allure-docker-service:2.21.0
+    container_name: allure-server
+    ports:
+      - "5050:5050"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 3
+      KEEP_HISTORY: 1
+    volumes:
+      - ../../reports/allure-results:/app/allure-results
+      - ../../reports/allure-report:/app/default-reports
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge

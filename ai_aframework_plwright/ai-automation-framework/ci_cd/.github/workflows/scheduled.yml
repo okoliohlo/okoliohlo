@@ -1,0 +1,94 @@
+name: Scheduled Tests
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+    # Run weekly full regression on Sundays at 3 AM UTC
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+jobs:
+  daily-smoke-tests:
+    if: github.event.schedule == '0 2 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps
+
+      - name: Run daily smoke tests
+        run: |
+          pytest tests/ \
+            --env=qa \
+            --browser=chromium \
+            --headless=true \
+            -n 4 \
+            -m smoke \
+            --alluredir=reports/allure-results \
+            -v
+
+      - name: Send notification
+        if: failure()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "🚨 Daily smoke tests failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Daily Smoke Tests Failed*\nEnvironment: QA\nCheck details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+  weekly-regression:
+    if: github.event.schedule == '0 3 * * 0'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps
+
+      - name: Run weekly regression
+        run: |
+          pytest tests/ \
+            --env=qa \
+            --browser=${{ matrix.browser }} \
+            --headless=true \
+            -n 4 \
+            -m regression \
+            --alluredir=reports/allure-results-${{ matrix.browser }} \
+            -v
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: regression-results-${{ matrix.browser }}
+          path: reports/
