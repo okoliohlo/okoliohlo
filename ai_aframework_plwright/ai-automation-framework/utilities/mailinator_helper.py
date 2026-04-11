@@ -81,7 +81,7 @@ class MailinatorHelper:
                             if messages:
                                 logger.info(f"Found {len(messages)} message(s) in inbox")
                                 return messages
-                        except:
+                        except Exception:
                             # Fallback: Try to scrape from HTML if JSON fails
                             logger.debug("JSON parsing failed, trying HTML scraping")
                             pass

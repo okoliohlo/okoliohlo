@@ -8,7 +8,6 @@ from playwright.sync_api import Page, Locator, expect
 from ai.self_healing.source_updater import SourceUpdater
 from utilities.logger import get_logger
 import allure
-import io
 
 logger = get_logger(__name__)
 

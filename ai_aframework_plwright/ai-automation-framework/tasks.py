@@ -49,7 +49,7 @@ def test_smoke(c, env="staging"):
     # Run UI smoke tests
     print("\n[2/2] Running UI smoke tests...")
     c.run(
-        "python run_bdd_tests.py --tags=@smoke",
+        "python run_bdd_tests.py --env={} --tags=@smoke".format(env),
         pty=False
     )
     
@@ -105,7 +105,7 @@ def test_demo(c, headless=False, env="demo"):
     print(f"Environment: {env}")
     print("=" * 80)
     
-    cmd = "python run_bdd_tests.py --tags=@demo"
+    cmd = "python run_bdd_tests.py --env={} --tags=@demo".format(env)
     
     if headless:
         os.environ["HEADLESS"] = "true"
@@ -136,7 +136,7 @@ def test_ui(c, tags="@tc01", headless=False, env="staging"):
     print(f"Environment: {env}")
     print("=" * 80)
     
-    cmd = "python run_bdd_tests.py"
+    cmd = "python run_bdd_tests.py --env={}".format(env)
     
     if tags:
         cmd += f" --tags={tags}"
@@ -174,7 +174,7 @@ def test_all(c, env="staging"):
     
     # Run UI tests
     print("\n[2/2] Running UI tests...")
-    c.run("python run_bdd_tests.py", pty=False)
+    c.run("python run_bdd_tests.py --env={}".format(env), pty=False)
     
     print("\n" + "=" * 80)
     print("✅ ALL TESTS COMPLETED")
@@ -202,7 +202,7 @@ def test_regression(c, env="staging"):
     
     # Run UI regression tests
     print("\n[2/2] Running UI regression tests...")
-    c.run("python run_bdd_tests.py --tags=@regression", pty=False)
+    c.run("python run_bdd_tests.py --env={} --tags=@regression".format(env), pty=False)
     
     print("\n" + "=" * 80)
     print("✅ REGRESSION TESTS COMPLETED")
@@ -465,7 +465,7 @@ def lint(c):
     try:
         c.run("flake8 business/ tests/ utilities/ --max-line-length=120 --exclude=__pycache__", pty=False)
         print("\n✅ LINTING PASSED")
-    except:
+    except Exception:
         print("\n❌ LINTING FAILED")
     
     print("=" * 80)
@@ -484,7 +484,7 @@ def format_code(c):
     try:
         c.run("black business/ tests/ utilities/ --line-length=120", pty=False)
         print("\n✅ CODE FORMATTED")
-    except:
+    except Exception:
         print("\n❌ Black not installed. Install with: pip install black")
     
     print("=" * 80)

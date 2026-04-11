@@ -1,282 +1,190 @@
-# AI-Driven Automation Framework - Installation Guide
+﻿# AI-Driven Automation Framework - Installation Guide
 
-## 📦 What's Included
+## What's Included
 
-This archive contains a complete, production-ready automation testing framework with:
+This framework provides production-ready automation testing with:
 
-- ✅ UI Testing (Playwright)
-- ✅ API Testing (Requests)  
-- ✅ AI Self-Healing Mechanism
-- ✅ Parallel Execution
-- ✅ Allure Reporting
-- ✅ CI/CD Integration (Jenkins & GitHub Actions)
-- ✅ Docker Support
-- ✅ Multi-Environment Configuration
+- UI Testing (Playwright + Behave BDD)
+- API Testing (Requests + Pytest)
+- AI Self-Healing Mechanism (DOM analysis, text/attribute/AI-based strategies)
+- Allure Reporting
+- Multi-Environment Configuration (qa, staging, production, local, demo)
+- CI/CD Integration (Jenkins & GitHub Actions)
 
-## 🚀 Quick Start
-
-### 1. Extract Archive
-
-```bash
-tar -xzf ai-automation-framework.tar.gz
-cd ai-automation-framework
-```
-
-### 2. Run Setup
-
-```bash
-chmod +x scripts/*.sh
-./scripts/setup.sh
-```
-
-### 3. Configure Environment
-
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
-
-### 4. Run Tests
-
-```bash
-# Run smoke tests
-./scripts/run_tests.sh --suite smoke
-
-# Run full regression
-./scripts/run_tests.sh --suite regression --workers 4
-```
-
-### 5. View Reports
-
-```bash
-# Open Allure report
-allure serve reports/allure-results
-
-# Or open HTML report
-open reports/report.html
-```
-
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.11 or higher
 - pip
-- Git (optional)
 
-## 🛠️ Manual Setup (if script fails)
+## Quick Start
 
-```bash
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+### 1. Install Dependencies
 
-# Install dependencies
+`ash
 pip install -r requirements.txt
+`
 
-# Install Playwright browsers
-playwright install --with-deps
+### 2. Install Playwright Browsers
 
-# Run tests
-pytest tests/ -m smoke -v
-```
+`ash
+playwright install chromium
+`
 
-## 📁 Project Structure
+### 3. Configure Environment
 
-```
+Edit `config/environments.yaml` with your target URLs, credentials, and feature flags.
+
+### 4. Run Tests
+
+`ash
+# Run smoke tests against QA
+python -m invoke test-smoke --env=qa
+
+# Run API tests
+python -m invoke test-api
+
+# Run UI tests
+python run_bdd_tests.py --env=staging --tags=@smoke
+
+# Run full regression
+python -m invoke test-regression --env=staging
+`
+
+### 5. View Reports
+
+`ash
+# Generate and serve Allure report
+allure serve reports/allure-results
+
+# Or generate and open
+allure generate reports/allure-results -o reports/allure-report --clean
+allure open reports/allure-report
+`
+
+## Project Structure
+
+`
 ai-automation-framework/
-├── config/              # Configuration management
-├── core/                # Core framework components
-├── business/            # Business logic layer
-│   ├── ui/             # UI pages and flows
-│   └── api/            # API endpoints
-├── ai/                  # AI components
-│   ├── self_healing/   # Self-healing engine
-│   └── failure_analysis/ # Failure analyzer
-├── utilities/           # Utility functions
-├── tests/               # Test cases
-│   ├── ui/             # UI tests
-│   ├── api/            # API tests
-│   └── integration/    # E2E tests
-├── ci_cd/               # CI/CD configs
-└── scripts/             # Utility scripts
-```
++-- config/              # Configuration management
+|   +-- config.py        # Singleton config loader
+|   +-- environments.yaml
+|   +-- test_suites.yaml
++-- core/                # Core framework components
+|   +-- driver_factory.py
+|   +-- api_client.py
+|   +-- base_test.py
++-- business/            # Business logic layer
+|   +-- ui/              # Page objects & flows
+|   +-- api/             # API endpoints
++-- ai/                  # AI components
+|   +-- self_healing/    # Self-healing engine & agents
+|   +-- failure_analysis/
+|   +-- test_generation/
++-- utilities/           # Logger, helpers, data generator, etc.
++-- tests/
+|   +-- api/             # API tests (pytest)
+|   +-- ui/              # UI tests (behave BDD)
++-- ci_cd/               # CI/CD configs
++-- tasks.py             # Invoke task runner
++-- run_bdd_tests.py     # UI test runner
++-- run_api_tests.py     # API test runner
++-- run_all_tests.py     # Combined runner
+`
 
-## 🎯 Running Different Test Types
+## Running Different Test Types
 
-```bash
-# UI tests only
-pytest -m ui -v
+`ash
+# API tests (pytest)
+python -m pytest tests/api/ -v
+python -m pytest tests/api/ -m smoke -v
 
-# API tests only  
-pytest -m api -v
+# UI tests (behave) -- --env is required
+python run_bdd_tests.py --env=qa
+python run_bdd_tests.py --env=staging --tags=@smoke
 
-# Smoke tests
-pytest -m smoke -v
+# All tests
+python run_all_tests.py --env=staging
 
-# Regression suite
-pytest -m regression -v
+# Using invoke tasks
+python -m invoke test-api
+python -m invoke test-ui --env=qa --tags=@smoke
+python -m invoke test-demo --env=demo
+python -m invoke test-all --env=staging
+`
 
-# Specific test file
-pytest tests/ui/test_login.py -v
-
-# With parallel execution
-pytest tests/ -n 4 -m smoke -v
-```
-
-## 🔧 Configuration
+## Configuration
 
 ### Environment Configuration
 
-Edit `config/environments.yaml` to add/modify environments:
+Edit `config/environments.yaml` to add or modify environments:
 
-```yaml
+`yaml
 qa:
   base_url: "https://qa.example.com"
   api_base_url: "https://api-qa.example.com"
+  browser: chromium
+  headless: true
+  timeout: 30000
   credentials:
     standard:
       username: "user@test.com"
       password: "password"
-```
+  features:
+    self_healing: true
+    ai_analysis: true
+`
 
-### Feature Flags (.env)
+## AI Self-Healing
 
-```bash
-SELF_HEALING=true          # Enable AI self-healing
-AI_ANALYSIS=true           # Enable failure analysis
-VIDEO_RECORDING=onfailure  # Video recording mode
-PARALLEL_WORKERS=4         # Number of parallel workers
-```
+The framework automatically heals broken locators using three strategies:
 
-## 🐳 Docker Usage
+1. **Text-based healing** - Finds elements by visible text content
+2. **Attribute-based healing** - Uses stable HTML attributes (data-testid, aria-label, name, etc.)
+3. **AI-based healing** - DOM analysis with weighted feature scoring (tag, text, attributes, classes, position)
 
-```bash
-# Build and run
-cd ci_cd/docker
-docker-compose up test-runner
+Healing events are logged, stored in SQLite, and reported in Allure.
 
-# View Allure report
-docker-compose up allure-server
-# Access at http://localhost:5050
-```
+## Writing Tests
 
-## 📊 CI/CD Integration
+### UI Test (Behave BDD)
 
-### Jenkins
+`gherkin
+# tests/ui/features/login.feature
+Feature: Login
+  Scenario: User logs in successfully
+    Given I am using the "staging" environment
+    When I open the CareLink page
+    Then I should see the login form
+    When I login as "standard" user
+    Then I should be logged in successfully
+`
 
-1. Copy `ci_cd/Jenkinsfile` to your Jenkins pipeline
-2. Configure parameters in Jenkins
-3. Run pipeline
+### API Test (Pytest)
 
-### GitHub Actions
-
-1. Copy workflows from `ci_cd/.github/workflows/` to `.github/workflows/`
-2. Push to GitHub
-3. Workflows will run automatically
-
-## 🤖 AI Self-Healing
-
-The framework automatically heals broken locators using:
-
-1. **Text-based healing** - Finds elements by text content
-2. **Attribute-based healing** - Uses stable attributes
-3. **AI-based healing** - Machine learning predictions
-
-Healing events are logged and reported in Allure.
-
-## 📈 Reporting
-
-### Allure Report
-
-```bash
-# Generate and open
-allure serve reports/allure-results
-
-# Generate only
-allure generate reports/allure-results -o reports/allure-report --clean
-```
-
-### HTML Report
-
-Generated automatically at `reports/report.html`
-
-## 🧪 Writing Tests
-
-### UI Test Example
-
-```python
+`python
 import pytest
-from business.ui.pages.login_page import LoginPage
-
-@pytest.mark.ui
-@pytest.mark.smoke
-def test_login(login_page: LoginPage):
-    login_page.open()
-    login_page.login("user@test.com", "password")
-    assert login_page.is_logged_in()
-```
-
-### API Test Example
-
-```python
-import pytest
-from business.api.endpoints.user_endpoint import UserEndpoint
 
 @pytest.mark.api
-def test_get_user(user_endpoint: UserEndpoint):
-    user = user_endpoint.get_user(1)
-    assert user["id"] == 1
-```
+@pytest.mark.smoke
+def test_get_user(authenticated_api_client):
+    response = authenticated_api_client.get("/users/1")
+    assert response.status_code == 200
+`
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### Common Issues
+**Playwright browsers not installed:**
+`ash
+playwright install --with-deps
+`
 
-**Issue**: Playwright browsers not installed
-```bash
-Solution: playwright install --with-deps
-```
+**Module not found:**
+`ash
+pip install -r requirements.txt
+`
 
-**Issue**: Permission denied on scripts
-```bash
-Solution: chmod +x scripts/*.sh
-```
+**Tests failing with timeout:**
+Increase timeout in `config/environments.yaml`.
 
-**Issue**: Module not found
-```bash
-Solution: source venv/bin/activate && pip install -r requirements.txt
-```
-
-**Issue**: Tests failing with timeout
-```bash
-Solution: Increase timeout in config/environments.yaml
-```
-
-## 📚 Documentation
-
-- [Playwright Docs](https://playwright.dev/python/)
-- [Pytest Docs](https://docs.pytest.org/)
-- [Allure Docs](https://docs.qameta.io/allure/)
-
-## 💡 Best Practices
-
-1. **Use Page Objects** - Keep locators in page classes
-2. **Use Fixtures** - Leverage pytest fixtures for setup
-3. **Mark Tests** - Use pytest markers (@pytest.mark.smoke)
-4. **Parametrize** - Use @pytest.mark.parametrize for data-driven tests
-5. **Self-Healing** - Give elements logical names for healing
-6. **Async Updates** - Update page objects when healing occurs
-
-## 🆘 Support
-
-For issues or questions:
-- Check logs in `reports/logs/`
-- Review Allure report for details
-- Check self-healing notifications
-
-## 📝 License
-
-MIT License - Feel free to use and modify
-
-## 🎉 Happy Testing!
-
-The framework is ready to use. Start by running smoke tests and explore from there!
+**--env required error for UI tests:**
+Always pass `--env=<environment>` when running `run_bdd_tests.py`.

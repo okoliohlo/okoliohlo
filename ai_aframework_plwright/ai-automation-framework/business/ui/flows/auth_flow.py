@@ -1,4 +1,4 @@
-"""
+﻿"""
 Authentication Flow
 High-level authentication workflows
 """
@@ -61,13 +61,12 @@ class AuthFlow:
         if self.landing_page.is_landing_loaded():
             logger.info("Login successful")
             return True
-        else:
-            error_message = self.login_page.get_error_message()
-            logger.error(f"Login failed: {error_message}")
-            return False
+
+        logger.error("Login failed")
+        return False
 
     @allure.step("Complete logout flow")
     def logout(self):
         """Complete logout flow"""
         logger.info("Starting logout flow")
-        self.login_page.logout()
+        self.landing_page.logout()

@@ -127,7 +127,7 @@ class LocatorExtractor:
         """Check if selector matches exactly one element"""
         try:
             return self.page.locator(selector).count() == 1
-        except:
+        except Exception:
             return False
     
     def extract_page_locators(self, page_name, element_definitions):
@@ -213,7 +213,7 @@ def main():
         try:
             page.click('#landing-login-button-id')
             page.wait_for_timeout(2000)
-        except:
+        except Exception:
             logger.warning("Could not click sign in button")
         
         # Extract Login Page locators
@@ -289,7 +289,7 @@ def main():
                         page.wait_for_timeout(2000)
                         logger.info("Navigated to reports page")
                         break
-                except:
+                except Exception:
                     continue
             
             reports_elements = {

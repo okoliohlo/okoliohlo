@@ -58,7 +58,7 @@ def inspect_carelink():
                     button = page.get_by_role("button").nth(i)
                     text = button.inner_text()
                     print(f"  Button {i}: '{text}'")
-                except:
+                except Exception:
                     pass
         
         # Take a screenshot

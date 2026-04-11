@@ -70,9 +70,9 @@ class LandingPage(BasePage):
         """
         # Check for multiple possible landing page indicators
         return (
-            self.is_element_visible(self.USER_MENU, self.USER_MENU_NAME, timeout=5000) or
-            self.is_element_visible(self.LANDING_HEADER, self.LANDING_HEADER_NAME, timeout=5000) or
-            self.is_element_visible(self.NAVIGATION_MENU, self.NAVIGATION_MENU_NAME, timeout=5000)
+            self.is_element_visible_with_fallback(self.USER_MENU, self.USER_MENU_NAME, timeout=5000) or
+            self.is_element_visible_with_fallback(self.LANDING_HEADER, self.LANDING_HEADER_NAME, timeout=5000) or
+            self.is_element_visible_with_fallback(self.NAVIGATION_MENU, self.NAVIGATION_MENU_NAME, timeout=5000)
         )
 
     @allure.step("Get welcome message")
@@ -83,8 +83,8 @@ class LandingPage(BasePage):
         Returns:
             Welcome message text
         """
-        if self.is_element_visible(self.WELCOME_MESSAGE, self.WELCOME_MESSAGE_NAME):
-            return self.get_text(self.WELCOME_MESSAGE, self.WELCOME_MESSAGE_NAME)
+        if self.is_element_visible_with_fallback(self.WELCOME_MESSAGE, self.WELCOME_MESSAGE_NAME):
+            return self.get_text(self.WELCOME_MESSAGE[0], self.WELCOME_MESSAGE_NAME)
         return ""
 
     @allure.step("Verify user is logged in")
@@ -103,13 +103,13 @@ class LandingPage(BasePage):
         logger.info("Attempting to click user menu")
         
         # Check if element is visible first
-        if not self.is_element_visible(self.USER_MENU, self.USER_MENU_NAME, timeout=5000):
+        if not self.is_element_visible_with_fallback(self.USER_MENU, self.USER_MENU_NAME, timeout=5000):
             error_msg = f"User menu not found with selector: {self.USER_MENU}"
             logger.error(error_msg)
             raise Exception(error_msg)
         
         # Click user menu
-        self.click_element(self.USER_MENU, self.USER_MENU_NAME)
+        self.click_element_with_fallback(self.USER_MENU, self.USER_MENU_NAME)
         logger.info("User menu clicked")
 
     @allure.step("Logout from landing page")
@@ -124,13 +124,13 @@ class LandingPage(BasePage):
         self.page.wait_for_timeout(500)  # Wait for menu to appear
         
         # Check if logout button is visible
-        if not self.is_element_visible(self.LOGOUT_BUTTON, self.LOGOUT_BUTTON_NAME, timeout=5000):
+        if not self.is_element_visible_with_fallback(self.LOGOUT_BUTTON, self.LOGOUT_BUTTON_NAME, timeout=5000):
             error_msg = f"Logout button not found with selector: {self.LOGOUT_BUTTON}"
             logger.error(error_msg)
             raise Exception(error_msg)
         
         # Click logout button
-        self.click_element(self.LOGOUT_BUTTON, self.LOGOUT_BUTTON_NAME)
+        self.click_element_with_fallback(self.LOGOUT_BUTTON, self.LOGOUT_BUTTON_NAME)
         self.wait_for_page_load()
         logger.info("Logged out successfully")
 
@@ -165,7 +165,7 @@ class LandingPage(BasePage):
         Returns:
             True if navigation is visible, False otherwise
         """
-        return self.is_element_visible(self.NAVIGATION_MENU, self.NAVIGATION_MENU_NAME)
+        return self.is_element_visible_with_fallback(self.NAVIGATION_MENU, self.NAVIGATION_MENU_NAME)
 
     @allure.step("Get landing page title")
     def get_landing_title(self) -> str:

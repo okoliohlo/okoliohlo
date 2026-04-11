@@ -139,7 +139,7 @@ def after_all(context):
     # Cleanup DriverFactory if needed
     try:
         DriverFactory.cleanup()
-    except:
+    except Exception:
         pass
 
 

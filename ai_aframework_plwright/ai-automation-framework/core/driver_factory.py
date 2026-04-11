@@ -148,7 +148,7 @@ class DriverFactory:
                 try:
                     locator.wait_for(state="visible", timeout=5000)
                     page._healing_engine.record_success(element_name, selector, locator)
-                except:
+                except Exception:
                     pass  # Continue to healing attempt
             
             return locator

@@ -6,7 +6,6 @@ Handles CareLink-specific login functionality
 from business.ui.pages.base_page import BasePage
 from utilities.logger import get_logger
 import allure
-import time
 
 logger = get_logger(__name__)
 
@@ -146,9 +145,9 @@ class CareLinkLoginPage(BasePage):
         """
         logger.info(f"Performing login for user: {username}")
         self.enter_username(username)
-        time.sleep(0.5)  # Small delay between fields
+        self.page.wait_for_timeout(500)
         self.enter_password(password)
-        time.sleep(0.5)
+        self.page.wait_for_timeout(500)
         self.click_login_button()
     
     @allure.step("Verify login form is visible")

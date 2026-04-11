@@ -60,5 +60,5 @@ def authenticated_api_client(api_client, auth_endpoint) -> APIClient:
     # Logout
     try:
         auth_endpoint.logout()
-    except:
+    except Exception:
         pass

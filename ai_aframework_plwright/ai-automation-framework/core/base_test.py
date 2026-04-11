@@ -66,7 +66,7 @@ class BaseTest:
                 if config.video_recording != "off" and self.context:
                     video_path = self.page.video.path()
                     logger.info(f"Video saved: {video_path}")
-            except:
+            except Exception:
                 pass
 
         if self.context:
