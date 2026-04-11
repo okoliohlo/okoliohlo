@@ -1,4 +1,4 @@
-Feature: Contact page button validation
+Feature: Contact page validation
   As a user of the web application
   I want to be able to press "Contact" button
   So that I can slide down right to the Contact page

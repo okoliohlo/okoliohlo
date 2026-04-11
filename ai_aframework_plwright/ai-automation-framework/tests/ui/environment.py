@@ -4,12 +4,17 @@ Manages Playwright browser lifecycle and test context
 """
 
 import os
+import allure
 from playwright.sync_api import sync_playwright
 from config.config import config
 from utilities.logger import get_logger
+from utilities.allure_helper import AllureStepHelper
 from core.driver_factory import DriverFactory
 
 logger = get_logger(__name__)
+
+# Shared helper - created once per session in before_all
+_allure_helper: AllureStepHelper = None
 
 
 def before_all(context):
@@ -17,6 +22,9 @@ def before_all(context):
     Runs once before all tests
     Setup global test configuration
     """
+    global _allure_helper
+    _allure_helper = AllureStepHelper()
+
     logger.info("=" * 80)
     logger.info("BEHAVE TEST SESSION STARTED")
     logger.info(f"Environment: {config.environment}")
@@ -97,16 +105,19 @@ def after_scenario(context, scenario):
             context.page.screenshot(path=screenshot_path, full_page=True)
             logger.error(f"Screenshot saved: {screenshot_path}")
             
-            # Attach to report if using allure
-            try:
-                import allure
-                allure.attach.file(
-                    screenshot_path,
-                    name=f"{scenario.name}_failure",
-                    attachment_type=allure.attachment_type.PNG
+            # Attach full-page screenshot to Allure
+            allure.attach.file(
+                screenshot_path,
+                name=f"FAILED: {scenario.name} (full page)",
+                attachment_type=allure.attachment_type.PNG
+            )
+            
+            # Attach page HTML source for debugging
+            if _allure_helper and hasattr(context, 'page'):
+                _allure_helper.attach_page_source(
+                    context.page,
+                    name=f"Page source on failure: {scenario.name}"
                 )
-            except ImportError:
-                pass
                 
         except Exception as e:
             logger.error(f"Failed to capture screenshot: {e}")
@@ -145,16 +156,41 @@ def after_all(context):
 
 def before_step(context, step):
     """
-    Runs before each step (optional)
-    Can be used for detailed logging
+    Runs before each step
+    Starts per-step log capture for Allure attachment
     """
     logger.debug(f"Step: {step.keyword} {step.name}")
+    if _allure_helper:
+        _allure_helper.start_step_logging()
 
 
 def after_step(context, step):
     """
-    Runs after each step (optional)
-    Can be used for step-level screenshots or logging
+    Runs after each step
+    Attaches captured logs and screenshots to Allure report
     """
-    if step.status == 'failed':
-        logger.error(f"Step FAILED: {step.keyword} {step.name}")
+    step_title = f"{step.keyword} {step.name}"
+
+    # 1. Attach captured logs for this step
+    if _allure_helper:
+        _allure_helper.stop_step_logging_and_attach(step_title)
+
+    # 2. Handle screenshots
+    if hasattr(context, 'page'):
+        if step.status == 'failed':
+            logger.error(f"Step FAILED: {step_title}")
+            # Screenshot on failure - always full page
+            if _allure_helper:
+                _allure_helper.attach_screenshot(
+                    context.page,
+                    name=f"FAILED: {step_title}",
+                    full_page=True,
+                )
+        else:
+            # Screenshot on success - lightweight viewport only
+            if _allure_helper:
+                _allure_helper.attach_screenshot(
+                    context.page,
+                    name=f"Step: {step_title}",
+                    full_page=False,
+                )

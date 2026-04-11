@@ -68,6 +68,9 @@ class Config:
         self.videos_dir = self.reports_dir / "videos"
         self.logs_dir = self.reports_dir / "logs"
 
+        # Paths - persistent data (self-healing DB, learned selectors)
+        self.data_dir = self.project_root / "ai" / "self_healing" / "data"
+
         # Create directories
         self._create_directories()
 
@@ -98,7 +101,8 @@ class Config:
             self.allure_results_dir,
             self.screenshots_dir,
             self.videos_dir,
-            self.logs_dir
+            self.logs_dir,
+            self.data_dir
         ]:
             directory.mkdir(parents=True, exist_ok=True)
 

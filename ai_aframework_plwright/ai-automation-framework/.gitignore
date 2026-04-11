@@ -57,7 +57,8 @@ logs/
 .coverage
 htmlcov/
 
-# Database
+# Database / persistent data
+ai/self_healing/data/
 *.db
 *.sqlite
 *.sqlite3

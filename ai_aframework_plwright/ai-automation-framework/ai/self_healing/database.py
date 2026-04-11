@@ -45,7 +45,7 @@ class HealingDatabase:
             return
         self._initialized = True
 
-        self.db_path: Path = config.reports_dir / "self_healing.db"
+        self.db_path: Path = config.data_dir / "self_healing.db"
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._local = threading.local()
         self._init_schema()

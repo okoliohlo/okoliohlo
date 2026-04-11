@@ -144,13 +144,13 @@ class SourceUpdater:
             answer = "n"
 
         if answer in ("y", "yes", ""):
-            logger.info("[SourceUpdater] Human APPROVED the update")
+            logger.info("[SourceUpdater] Reviewer APPROVED the update")
             return self._apply_update(
                 source_path, old_selector, new_selector,
                 element_name, confidence, strategy,
             )
 
-        logger.info("[SourceUpdater] Human REJECTED the update")
+        logger.info("[SourceUpdater] Reviewer REJECTED the update")
         self._queue_pending(
             source_path, old_selector, new_selector,
             element_name, confidence, strategy,
