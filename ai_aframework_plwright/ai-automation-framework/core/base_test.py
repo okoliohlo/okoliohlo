@@ -45,7 +45,7 @@ class BaseTest:
         yield
 
         # Teardown
-        self._teardown(request)
+        self._teardown(request=request)
 
         logger.info(f"Finished test: {test_name}")
 
@@ -53,11 +53,22 @@ class BaseTest:
         """Setup method - override in subclasses if needed"""
         pass
 
-    def _teardown(self, request):
-        """Teardown method with screenshot on failure"""
+    def _teardown(self, request=None, failed: bool = False, test_name: str = ""):
+        """Teardown method with screenshot on failure
+
+        Works with both pytest (pass *request*) and Behave (pass *failed* + *test_name*).
+        """
+        # Determine failure status from pytest request or explicit flag
+        if request is not None:
+            is_failed = request.node.rep_call.failed if hasattr(request.node, 'rep_call') else False
+            name = request.node.name
+        else:
+            is_failed = failed
+            name = test_name
+
         # Capture screenshot on failure
-        if request.node.rep_call.failed if hasattr(request.node, 'rep_call') else False:
-            self.capture_screenshot(request.node.name)
+        if is_failed:
+            self.capture_screenshot(name)
 
         # Close page and context
         if self.page:
